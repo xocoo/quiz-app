@@ -2,4 +2,15 @@
     <string name="app_name">Quiz App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="score">0/15</string>
+    <string name="btn_skip">skip</string>
+    <string name="btn_next">next</string>
+    <string name="questions_list">Do you know Android?</string>
+    <string name="true_answer">True</string>
+    <string name="false_answer">False</string>
+    <string name="tentative_answer">Maybe</string>
+    <string name="answer_toast_message">Pleas select your answer from the choice.</string>
+    <string name="btn_try_again">try again</string>
+    <string name="btn_result_analysis">result analysis</string>
+    <string name="your_score">Your Score</string>
 </resources>

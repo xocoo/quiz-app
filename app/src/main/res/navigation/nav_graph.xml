@@ -7,27 +7,16 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="khosbayar.miu.quizapp.SplashFragment"
+        android:name="khosbayar.miu.quizapp.UI.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_onboardFragment"
-            app:destination="@id/onboardFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/onboardFragment"
-        android:name="khosbayar.miu.quizapp.OnboardFragment"
-        android:label="fragment_onboard"
-        tools:layout="@layout/fragment_onboard">
-        <action
-            android:id="@+id/action_onboardFragment_to_quizFragment"
+            android:id="@+id/action_splashFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
-        android:name="khosbayar.miu.quizapp.QuizFragment"
+        android:name="khosbayar.miu.quizapp.UI.QuizFragment"
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz">
         <action
@@ -36,16 +25,33 @@
     </fragment>
     <fragment
         android:id="@+id/scoreFragment"
-        android:name="khosbayar.miu.quizapp.ScoreFragment"
+        android:name="khosbayar.miu.quizapp.UI.ScoreFragment"
         android:label="fragment_score"
         tools:layout="@layout/fragment_score">
         <action
             android:id="@+id/action_scoreFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_scoreFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+        <argument
+            android:name="score"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="answers"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="khosbayar.miu.quizapp.ResultFragment"
+        android:name="khosbayar.miu.quizapp.UI.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result">
+        <action
+            android:id="@+id/action_resultFragment_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
+        <argument
+            android:name="answers"
+            app:argType="string[]" />
+    </fragment>
 </navigation>

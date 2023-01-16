@@ -5,18 +5,21 @@ import androidx.room.*
 @Dao
 
 interface QuizDAO {
-    @Query("SELECT * FROM Quiz ORDER BY id")
-    fun getAllQuizes(): List<Quiz>
+    @Query("SELECT * FROM QUIZ")
+    suspend fun getAllQuizes(): List<Quiz>
 
     @Insert
-    fun addQuiz(quiz: Quiz)
+    suspend fun addQuiz(quiz: Quiz)
 
     @Insert
-    fun addMultipleQuizes(vararg quiz: Quiz)
+    suspend fun addMultipleQuizes(vararg quiz: Quiz)
 
     @Update
-    fun updateQuiz(quiz: Quiz)
+    suspend fun updateQuiz(quiz: Quiz)
 
     @Delete
-    fun deleteQuiz(quiz: Quiz)
+    suspend fun deleteQuiz(quiz: Quiz)
+
+    @Query("DELETE FROM QUIZ WHERE 1=1")
+    suspend fun deleteAllQuiz()
 }
