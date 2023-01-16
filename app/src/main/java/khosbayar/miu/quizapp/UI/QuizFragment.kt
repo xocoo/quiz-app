@@ -18,6 +18,7 @@ import khosbayar.miu.quizapp.Utils.BaseFragment
 import khosbayar.miu.quizapp.Utils.toast
 import kotlinx.coroutines.launch
 
+
 class QuizFragment : BaseFragment() {
 
     private lateinit var tvQuestion: TextView
@@ -44,44 +45,46 @@ class QuizFragment : BaseFragment() {
         tvQuestionId = view.findViewById(R.id.tv_question_id)
         tvScore = view.findViewById(R.id.tv_score)
         quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
-        val scoreLiveData: MutableLiveData<Int> = quizViewModel!!.getInitialScore()
-        scoreLiveData.observe(viewLifecycleOwner) {
-            tvScore.text = String.format("%d/15", it)
-        }
         launch {
             context?.let {
                 questions = QuizDatabase(it).getQuizDao().getAllQuizes()
-                changeQuestion(view)
+                nextQuestion(view)
             }
         }
         homeBtn.setOnClickListener {
-//            changeQuestion(view)
             quizViewModel!!.reset()
-            Navigation.findNavController(view).navigate(R.id.splashFragment)
+            Navigation.findNavController(view).navigate(R.id.action_quizFragment_to_splashFragment)
         }
 
         skipBtn.setOnClickListener {
-            changeQuestion(view)
+            nextQuestion(view)
         }
         nextBtn.setOnClickListener {
             if (selectedChoice != null) {
-                evaluateAnswer(selectedChoice!!)
-                changeQuestion(view)
+                checkAnswer(selectedChoice!!)
+                nextQuestion(view)
             } else context?.toast(getString(R.string.answer_toast_message))
 
         }
         radioGroup = view.findViewById(R.id.question_radio)
 
-        radioGroup.setOnCheckedChangeListener(this::handler)
+        radioGroup.setOnCheckedChangeListener(this::getAnwser)
         return view
     }
 
-    private fun changeQuestion(view: View) {
+    private fun nextQuestion(view: View) {
+        val totalQuestions: Int = questions.size
+        val scoreLiveData: MutableLiveData<Int> = quizViewModel!!.getInitialScore()
+        scoreLiveData.observe(viewLifecycleOwner) {
+            tvScore.text = String.format("%d/%d", it, totalQuestions)
+        }
         val selectedAns = if (selectedChoice != null) selectedChoice else ""
         answers.add(selectedAns!!)
-        if (qstnIdx == questions.size) {
+        if (qstnIdx == totalQuestions) {
             val action = QuizFragmentDirections.actionQuizFragmentToScoreFragment(
-                score = quizViewModel?.getFinalScore()?.value!!, answers = answers.toTypedArray()
+                score = quizViewModel?.getFinalScore()?.value!!,
+                answers = answers.toTypedArray(),
+                totalQuestions = totalQuestions
             )
             Navigation.findNavController(requireView()).navigate(action)
             return
@@ -100,7 +103,7 @@ class QuizFragment : BaseFragment() {
         radioGroup.clearCheck()
     }
 
-    private fun handler(group: RadioGroup, checkedId: Int) {
+    private fun getAnwser(group: RadioGroup, checkedId: Int) {
         val radio = view?.findViewById<RadioButton>(checkedId)
         when (checkedId) {
             R.id.radio_q1_a -> if (radio != null) {
@@ -118,7 +121,7 @@ class QuizFragment : BaseFragment() {
         }
     }
 
-    private fun evaluateAnswer(ans: String) {
+    private fun checkAnswer(ans: String) {
         if (currentQuiz.correct_ans == ans) {
             quizViewModel!!.getCurrentScore()
         }

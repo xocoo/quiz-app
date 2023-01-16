@@ -6,17 +6,33 @@
     tools:context=".UI.SplashFragment">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="center">
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/headerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:text="@string/mobile_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:src="@drawable/splash_screen" />
 
         <Button
-            android:id="@+id/btn_startquiz"
+            android:id="@+id/btn_startQuiz"
             android:layout_width="216dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -27,6 +43,23 @@
             android:backgroundTint="@color/white"
             android:text="Start Quiz"
             android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/footerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:text="@string/copyright"
+                android:textColor="@color/darkblue"
+                android:textSize="20sp" />
+        </LinearLayout>
     </RelativeLayout>
+
 
 </FrameLayout>

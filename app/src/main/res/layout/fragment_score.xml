@@ -59,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/orange"
                 android:onClick="skipQuestion"
                 android:text="@string/btn_try_again" />
 
@@ -68,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/teal_700"
                 android:onClick="nextQuestion"
                 android:text="@string/btn_result_analysis" />
         </LinearLayout>

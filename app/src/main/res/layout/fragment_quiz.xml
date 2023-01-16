@@ -126,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/orange"
                 android:onClick="skipQuestion"
                 android:text="@string/btn_home" />
 
@@ -135,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/darkgray"
                 android:onClick="skipQuestion"
                 android:text="@string/btn_skip" />
 

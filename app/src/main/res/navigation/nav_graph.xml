@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_quizFragment_to_scoreFragment"
             app:destination="@id/scoreFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoreFragment"
@@ -41,6 +44,10 @@
         <argument
             android:name="answers"
             app:argType="string[]" />
+        <argument
+            android:name="totalQuestions"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import khosbayar.miu.quizapp.DB.Quiz
 import khosbayar.miu.quizapp.DB.QuizDatabase
@@ -12,25 +13,27 @@ import khosbayar.miu.quizapp.R
 import khosbayar.miu.quizapp.Utils.BaseFragment
 import kotlinx.coroutines.launch
 
+
 class SplashFragment : BaseFragment() {
 
-    private var btn_startquiz: Button? = null
+    private var btn_startQuiz: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
-        btn_startquiz = view.findViewById(R.id.btn_startquiz) as Button
-        btn_startquiz!!.setOnClickListener {
+        btn_startQuiz = view.findViewById(R.id.btn_startQuiz) as Button
+        btn_startQuiz!!.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_quizFragment)
 
         }
-        addQuestionsToDB()
+        popluateToDB()
         return view
     }
 
-    fun addQuestionsToDB() {
+    fun popluateToDB() {
         val quiz1 = Quiz(
             1,
             "Which of the following is the topmost layer of android architecture?",
@@ -166,6 +169,15 @@ class SplashFragment : BaseFragment() {
             "Running",
             "Paused"
         )
+        val quiz16 = Quiz(
+            16,
+            "Android is _______",
+            "a web browser",
+            "a web server",
+            "an operating system",
+            "None of the above",
+            "an operating system"
+        )
 
         launch {
             context?.let {
@@ -174,7 +186,7 @@ class SplashFragment : BaseFragment() {
                 QuizDatabase(it)
                     .getQuizDao().addMultipleQuizes(
                         quiz1, quiz2, quiz3, quiz4, quiz5, quiz6, quiz7, quiz8,
-                        quiz9, quiz10, quiz11, quiz12, quiz13, quiz14, quiz15
+                        quiz9, quiz10, quiz11, quiz12, quiz13, quiz14, quiz15, quiz16
                     )
             }
         }

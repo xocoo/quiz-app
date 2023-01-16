@@ -1,7 +1,6 @@
 package khosbayar.miu.quizapp.UI
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ class ResultFragment : BaseFragment() {
         val view = inflater.inflate(R.layout.fragment_result, container, false)
         val listView = view.findViewById<ListView>(R.id.list_view)
         val answers = ResultFragmentArgs.fromBundle(requireArguments()).answers
-        Log.d("Result Answers", "${answers.toList()}")
         launch {
             context?.let {
                 questions = QuizDatabase(it).getQuizDao().getAllQuizes()

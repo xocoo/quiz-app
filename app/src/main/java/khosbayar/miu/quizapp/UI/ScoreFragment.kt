@@ -2,7 +2,6 @@ package khosbayar.miu.quizapp.UI
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,13 +25,12 @@ class ScoreFragment : BaseFragment() {
         tvScore = view.findViewById(R.id.tv_score)
         val score = ScoreFragmentArgs.fromBundle(requireArguments()).score
         val answers = ScoreFragmentArgs.fromBundle(requireArguments()).answers
-        Log.d("Score Answers", "${answers.toList()}")
-        Log.d("ScoreFragment Score", "$score")
-        val wrongAnswers = 15 - score
-        val finalScore = "$score/15"
+        val totalQuestions = ScoreFragmentArgs.fromBundle(requireArguments()).totalQuestions
+        val wrongAnswers = totalQuestions - score
+        val finalScore = "$score/$totalQuestions"
         val scoreResult = String.format(
-            "Total Questions: 15\n\nCorrect Answers(Score): %d\n\nWrong Answer: %d\n\nYour Score is: %s",
-            score, wrongAnswers, finalScore
+            "Total Questions: %d\n\nCorrect Answers(Score): %d\n\nWrong Answer: %d\n\nYour Score is: %s",
+            totalQuestions, score, wrongAnswers, finalScore
         )
         tvScore.text = scoreResult
         btnResult = view.findViewById(R.id.btn_result_analysis)

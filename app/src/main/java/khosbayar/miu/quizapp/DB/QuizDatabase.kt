@@ -35,7 +35,6 @@ abstract class QuizDatabase : RoomDatabase() {
             context.applicationContext,
             QuizDatabase::class.java,
             "QuizDB2"
-        )
-            .build()
+        ).build()
     }
 }
