@@ -24,8 +24,9 @@ class SplashFragment : BaseFragment() {
         btn_startquiz = view.findViewById(R.id.btn_startquiz) as Button
         btn_startquiz!!.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_quizFragment)
-            addQuestionsToDB()
+
         }
+        addQuestionsToDB()
         return view
     }
 

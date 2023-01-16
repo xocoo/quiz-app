@@ -19,4 +19,9 @@ class QuizViewModel : ViewModel() {
     fun getFinalScore(): MutableLiveData<Int> {
         return scoreLiveData
     }
+
+    fun reset() {
+        score = 0
+        scoreLiveData.value = 0
+    }
 }

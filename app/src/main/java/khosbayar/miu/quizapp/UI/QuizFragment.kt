@@ -38,6 +38,7 @@ class QuizFragment : BaseFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_quiz, container, false)
         val skipBtn = view.findViewById<Button>(R.id.btn_qstn_skip)
+        val homeBtn = view.findViewById<Button>(R.id.btn_home)
         val nextBtn = view.findViewById<Button>(R.id.btn_qstn_next)
         tvQuestion = view.findViewById(R.id.tv_question)
         tvQuestionId = view.findViewById(R.id.tv_question_id)
@@ -53,6 +54,12 @@ class QuizFragment : BaseFragment() {
                 changeQuestion(view)
             }
         }
+        homeBtn.setOnClickListener {
+//            changeQuestion(view)
+            quizViewModel!!.reset()
+            Navigation.findNavController(view).navigate(R.id.splashFragment)
+        }
+
         skipBtn.setOnClickListener {
             changeQuestion(view)
         }
@@ -72,7 +79,7 @@ class QuizFragment : BaseFragment() {
     private fun changeQuestion(view: View) {
         val selectedAns = if (selectedChoice != null) selectedChoice else ""
         answers.add(selectedAns!!)
-        if (qstnIdx == 15) {
+        if (qstnIdx == questions.size) {
             val action = QuizFragmentDirections.actionQuizFragmentToScoreFragment(
                 score = quizViewModel?.getFinalScore()?.value!!, answers = answers.toTypedArray()
             )
